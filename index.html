@@ -1,0 +1,369 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>INEZA Fidele | Software Engineer</title>
+<style>
+:root {
+  --bg: #0a192f;
+  --panel: #112240;
+  --teal: #64ffda;
+  --text: #ccd6f6;
+  --muted: #8892b0;
+  --border: #233554;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: Arial, sans-serif;
+  line-height: 1.7;
+}
+a { color: inherit; text-decoration: none; }
+.container { width: min(1100px, 90%); margin: auto; }
+header {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  background: rgba(10,25,47,.95);
+  border-bottom: 1px solid var(--border);
+  backdrop-filter: blur(12px);
+}
+nav {
+  min-height: 76px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+}
+.logo { font-size: 23px; font-weight: 800; }
+.logo span, .accent { color: var(--teal); }
+.nav-links { display: flex; gap: 28px; list-style: none; }
+.nav-links a:hover { color: var(--teal); }
+.menu {
+  display: none;
+  color: var(--teal);
+  background: none;
+  border: 1px solid var(--teal);
+  border-radius: 5px;
+  padding: 6px 12px;
+  font-size: 20px;
+}
+section { padding: 90px 0; scroll-margin-top: 75px; }
+.hero { min-height: 600px; display: flex; align-items: center; }
+.eyebrow { color: var(--teal); letter-spacing: 2px; font-size: 14px; }
+h1 {
+  font-size: clamp(42px, 7vw, 76px);
+  line-height: 1.12;
+  margin: 20px 0;
+  color: #e6f1ff;
+}
+h2 { color: #e6f1ff; font-size: 32px; margin-bottom: 25px; }
+h2 span { color: var(--teal); }
+h3 { color: #e6f1ff; margin-bottom: 10px; }
+.hero p, .about p { max-width: 650px; color: var(--muted); }
+.hero .subtitle { color: var(--text); font-size: 22px; margin-bottom: 18px; }
+.buttons { display: flex; gap: 15px; flex-wrap: wrap; margin-top: 30px; }
+.btn {
+  display: inline-block;
+  border: 1px solid var(--teal);
+  color: var(--teal);
+  padding: 11px 19px;
+  border-radius: 5px;
+  transition: .2s;
+}
+.btn.primary { background: var(--teal); color: var(--bg); font-weight: bold; }
+.btn:hover { transform: translateY(-3px); box-shadow: 0 8px 25px #64ffda20; }
+.hero-grid {
+  display: grid;
+  grid-template-columns: 1.4fr .8fr;
+  gap: 55px;
+  align-items: center;
+}
+.code-card {
+  background: var(--panel);
+  border: 1px solid var(--border);
+  padding: 28px;
+  border-radius: 12px;
+  box-shadow: 12px 12px 0 #64ffda10;
+  font-family: Consolas, monospace;
+  overflow-wrap: anywhere;
+}
+.code-card p { margin: 8px 0; color: var(--muted); }
+.code-card .green { color: var(--teal); }
+.section-heading { display: flex; align-items: center; gap: 14px; }
+.section-heading::after { content: ""; height: 1px; background: var(--border); flex: 1; }
+.about-grid { display: grid; grid-template-columns: 1.2fr 1fr; gap: 50px; }
+.about p { margin-bottom: 15px; }
+.facts { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.fact, .skill, .project, .contact-card {
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: 9px;
+}
+.fact { padding: 20px; }
+.fact strong { display: block; color: var(--teal); margin-bottom: 5px; }
+.fact span { font-size: 14px; color: var(--muted); }
+.projects-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+.project {
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  transition: transform .2s, border-color .2s;
+}
+.project:hover { transform: translateY(-6px); border-color: var(--teal); }
+.project-icon { font-size: 32px; margin-bottom: 16px; }
+.project p { color: var(--muted); font-size: 14px; flex: 1; }
+.tags { display: flex; flex-wrap: wrap; gap: 8px; margin: 18px 0; }
+.tags span {
+  color: var(--teal);
+  background: #64ffda12;
+  padding: 4px 9px;
+  border-radius: 4px;
+  font-size: 12px;
+}
+.project a { color: var(--teal); font-size: 14px; }
+.skills-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+.skill { padding: 24px; }
+.skill p { color: var(--muted); font-size: 14px; margin-top: 8px; }
+.contact-card { padding: 40px; text-align: center; }
+.contact-card p { color: var(--muted); max-width: 550px; margin: 0 auto; }
+.contact-card .btn { margin-top: 24px; }
+footer {
+  text-align: center;
+  padding: 25px;
+  border-top: 1px solid var(--border);
+  color: var(--muted);
+  font-size: 13px;
+}
+@media (max-width: 760px) {
+  .menu { display: block; }
+  .nav-links {
+    display: none;
+    position: absolute;
+    top: 76px; left: 0; right: 0;
+    background: var(--panel);
+    padding: 25px;
+    flex-direction: column;
+    gap: 15px;
+    border-bottom: 1px solid var(--border);
+  }
+  .nav-links.open { display: flex; }
+  .hero { min-height: auto; }
+  .hero-grid, .about-grid { grid-template-columns: 1fr; gap: 35px; }
+  .projects-grid, .skills-grid { grid-template-columns: 1fr; }
+  section { padding: 65px 0; }
+  h1 { font-size: 45px; }
+  .facts { gap: 10px; }
+  .contact-card { padding: 25px 18px; }
+}
+</style>
+</head>
+<body>
+
+<header>
+  <nav class="container">
+    <a href="#home" class="logo"><span>&lt;/&gt;</span> Fidele.</a>
+    <button class="menu" id="menu" aria-label="Toggle navigation"
+      aria-expanded="false">☰</button>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="#home">Home</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#skills">Skills</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </nav>
+</header>
+
+<main>
+<section class="hero" id="home">
+  <div class="container hero-grid">
+    <div>
+      <div class="eyebrow">HELLO, WORLD! I'M</div>
+      <h1>INEZA <span class="accent">Fidele</span></h1>
+      <p class="subtitle">Aspiring Software Engineer &amp; Developer</p>
+      <p>
+        I build practical digital solutions to real-world problems.
+        I'm passionate about software engineering, education technology,
+        and using creativity and code to make a difference.
+      </p>
+      <div class="buttons">
+        <a class="btn primary" href="#projects">Explore My Work ↗</a>
+        <a class="btn" href="#contact">Get In Touch</a>
+      </div>
+    </div>
+    <div class="code-card">
+      <p>// A little about me</p>
+      <p><span class="green">const</span> developer = {</p>
+      <p>&nbsp; name: <span class="green">"INEZA Fidele"</span>,</p>
+      <p>&nbsp; location: <span class="green">"Rwanda"</span>,</p>
+      <p>&nbsp; passion: <span class="green">"Building"</span>,</p>
+      <p>&nbsp; mindset: <span class="green">"Always learning"</span></p>
+      <p>};</p>
+      <p class="green">// Turning ideas into reality.</p>
+    </div>
+  </div>
+</section>
+
+<section id="about">
+  <div class="container">
+    <h2 class="section-heading">01. <span>About Me</span></h2>
+    <div class="about-grid">
+      <div class="about">
+        <p>
+          I'm a student at College Saint André in Rwanda, developing
+          my skills in software development and problem-solving.
+          I enjoy turning ideas into working applications and
+          exploring how technology can improve everyday life.
+        </p>
+        <p>
+          My goal is to become a software engineer who builds
+          useful, accessible, and reliable products. I'm committed
+          to learning, building projects, and growing through
+          collaboration and practical experience.
+        </p>
+      </div>
+      <div class="facts">
+        <div class="fact">
+          <strong>Education</strong>
+          <span>College Saint André, Rwanda</span>
+        </div>
+        <div class="fact">
+          <strong>Focus</strong>
+          <span>Software Engineering</span>
+        </div>
+        <div class="fact">
+          <strong>Based in</strong>
+          <span>Rwanda, East Africa</span>
+        </div>
+        <div class="fact">
+          <strong>Mission</strong>
+          <span>Technology with purpose</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="projects">
+  <div class="container">
+    <h2 class="section-heading">02. <span>Featured Projects</span></h2>
+    <div class="projects-grid">
+      <article class="project">
+        <div class="project-icon">⌘</div>
+        <h3>Repo Pilot</h3>
+        <p>
+          A developer-focused application designed to make
+          exploring and managing GitHub repositories easier.
+        </p>
+        <div class="tags">
+          <span>JavaScript</span><span>GitHub API</span><span>Web</span>
+        </div>
+        <a href="https://github.com/" target="_blank" rel="noopener">
+          Explore project ↗
+        </a>
+      </article>
+
+      <article class="project">
+        <div class="project-icon">🐍</div>
+        <h3>PyPlayground</h3>
+        <p>
+          A learning-focused project concept for making Python
+          practice more approachable and interactive.
+        </p>
+        <div class="tags">
+          <span>Python</span><span>Education</span><span>Learning</span>
+        </div>
+        <a href="https://github.com/" target="_blank" rel="noopener">
+          Explore project ↗
+        </a>
+      </article>
+
+      <article class="project">
+        <div class="project-icon">🎓</div>
+        <h3>Smart Class Manager</h3>
+        <p>
+          A school-oriented system concept for organizing smart
+          classroom bookings, schedules, and learning resources.
+        </p>
+        <div class="tags">
+          <span>Web Development</span><span>Education Tech</span>
+        </div>
+        <a href="https://github.com/" target="_blank" rel="noopener">
+          Explore project ↗
+        </a>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section id="skills">
+  <div class="container">
+    <h2 class="section-heading">03. <span>Skills &amp; Interests</span></h2>
+    <div class="skills-grid">
+      <div class="skill">
+        <h3>Frontend Development</h3>
+        <p>HTML, CSS, JavaScript, responsive layouts, and UI design.</p>
+      </div>
+      <div class="skill">
+        <h3>Programming</h3>
+        <p>Python, logical thinking, debugging, and problem-solving.</p>
+      </div>
+      <div class="skill">
+        <h3>Tools &amp; Growth</h3>
+        <p>Git, GitHub, project building, collaboration, and continuous learning.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="contact">
+  <div class="container">
+    <div class="contact-card">
+      <div class="eyebrow">04. WHAT'S NEXT?</div>
+      <h2 style="margin-top:12px">Let's Build Something <span>Meaningful</span></h2>
+      <p>
+        Have an idea, a collaboration opportunity, or a project
+        worth discussing? I'd love to hear from you.
+      </p>
+      <a class="btn primary" href="mailto:YOUR_EMAIL@example.com">
+        Say Hello ↗
+      </a>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer>
+  <p>Designed &amp; built by INEZA Fidele · Rwanda</p>
+  <p>Learning by building, one project at a time.</p>
+</footer>
+
+<script>
+const menu = document.getElementById("menu");
+const navLinks = document.getElementById("navLinks");
+
+menu.addEventListener("click", () => {
+  const open = navLinks.classList.toggle("open");
+  menu.setAttribute("aria-expanded", String(open));
+  menu.textContent = open ? "✕" : "☰";
+});
+
+document.querySelectorAll(".nav-links a").forEach(link => {
+  link.addEventListener("click", () => {
+    navLinks.classList.remove("open");
+    menu.setAttribute("aria-expanded", "false");
+    menu.textContent = "☰";
+  });
+});
+</script>
+</body>
+</html>
